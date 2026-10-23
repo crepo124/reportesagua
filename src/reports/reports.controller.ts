@@ -48,7 +48,7 @@ export class ReportsController {
     const report = await this.reportsService.create(dto, photoUrl);
     await this.emailService.sendEmail(
       envs.CREW_EMAIL,
-      'Nuevo reporte de fuga de agua',
+      'Nuevo reporte de fuga de agua2',
       generateReportTemplate(dto, photoUrl),
     );
     return report;
