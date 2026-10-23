@@ -7,12 +7,13 @@ import { Report } from './entities/report.entity';
 export class ReportsService {
   constructor(private readonly reportsRepository: ReportsRepository) {}
 
-  create(dto: CreateReportDto): Promise<Report> {
+  create(dto: CreateReportDto, photoUrl: string): Promise<Report> {
     return this.reportsRepository.create({
       address: dto.address,
       description: dto.description,
       severity: dto.severity,
       reporterPhone: dto.reporterPhone,
+      photoUrl,
       isResolved: false,
     });
   }

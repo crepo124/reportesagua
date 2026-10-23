@@ -20,11 +20,15 @@ const detailRow = (label: string, value: string): string => `
     <td style="padding:10px 16px;border-bottom:1px solid #e0e0e0;font-family:Arial,sans-serif;font-size:14px;font-weight:bold;color:#222;">${value}</td>
   </tr>`;
 
-export const generateReportTemplate = (dto: CreateReportDto): string => {
+export const generateReportTemplate = (
+  dto: CreateReportDto,
+  photoUrl: string,
+): string => {
   const safeAddress = escapeHtml(dto.address);
   const safeDescription = escapeHtml(dto.description);
   const safePhone = escapeHtml(dto.reporterPhone);
   const safeSeverity = severityLabel[dto.severity] ?? escapeHtml(dto.severity);
+  const safePhotoUrl = escapeHtml(photoUrl);
 
   return `<!DOCTYPE html>
 <html lang="es">
@@ -50,6 +54,11 @@ ${detailRow('Descripción', safeDescription)}
 ${detailRow('Severidad', safeSeverity)}
 ${detailRow('Teléfono de contacto', safePhone)}
               </table>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:8px 24px 8px 24px;">
+              <img src="${safePhotoUrl}" alt="Foto de la fuga" width="512" style="display:block;width:100%;max-width:512px;height:auto;border-radius:6px;border:1px solid #e0e0e0;" />
             </td>
           </tr>
           <tr>

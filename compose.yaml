@@ -1,4 +1,27 @@
 services:
+  api:
+    image: vdjuniorr/aguafix-api:latest
+    container_name: aguafix-api
+    ports:
+      - 3001:3000
+    environment:
+      - DB_TYPE=${DB_TYPE}
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
+      - MAILER_SERVICE=${MAILER_SERVICE}
+      - MAILER_USER=${MAILER_USER}
+      - MAILER_PASSWORD=${MAILER_PASSWORD}
+      - CREW_EMAIL=${CREW_EMAIL}
+      - AWS_REGION=${AWS_REGION}
+      - AWS_BUCKET_NAME=${AWS_BUCKET_NAME}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+    depends_on:
+      - postgres
+
   postgres:
     image: postgres:16
     container_name: water-reports-db
